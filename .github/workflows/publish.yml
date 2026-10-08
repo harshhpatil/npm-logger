@@ -1,0 +1,26 @@
+name: Publish Logger Package
+  
+on: 
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps: 
+      - name : Checkout Code
+        uses: actions/checkout@v4
+
+      - name : Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install Dependencies
+        uses: bun Install
+
+      - name: Build Package
+        uses: bun run Build
+
+      - name: Publish to NPM
+        run: bun publish --access public
+        env: 
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
