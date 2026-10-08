@@ -1,11 +1,14 @@
 name: Publish Logger Package
   
 on: 
-  release:
-    types: [created]
+  pull_request:
+    branches: [master]
+
+  push:
+    branches: [master]
 
 jobs:
-  publish:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps: 
       - name : Checkout Code
@@ -15,12 +18,13 @@ jobs:
         uses: oven-sh/setup-bun@v2
 
       - name: Install Dependencies
-        uses: bun Install
+        run: bun install
 
       - name: Build Package
-        uses: bun run Build
+        run: bun run build
 
       - name: Publish to NPM
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: bun publish --access public
         env: 
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
