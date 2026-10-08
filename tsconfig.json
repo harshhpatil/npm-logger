@@ -9,9 +9,10 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "types": ["@types/bun"]
   },
 
   // adding include
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "src/tests"]
 }
