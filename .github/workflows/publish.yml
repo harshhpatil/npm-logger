@@ -15,10 +15,10 @@ jobs:
         uses: oven-sh/setup-bun@v2
 
       - name: Install Dependencies
-        uses: bun Install
+        uses: bun install
 
       - name: Build Package
-        uses: bun run Build
+        uses: bun run build
 
       - name: Publish to NPM
         run: bun publish --access public
